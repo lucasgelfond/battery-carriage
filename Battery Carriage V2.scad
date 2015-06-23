@@ -25,7 +25,7 @@ carriageThick = 5;
 holeToCarriage = 2.5;
 
 //Extra height for the battery wall to fit the battery more comfortably.
-extraBatteryWall = 10;
+extraBatteryWall = 2.5;
 
 //Extra width for battery.
 extraBatteryWidth = 5;
