@@ -52,34 +52,14 @@ module mountingHole() {
 module mountingPlate() {
     difference() {
         cube([plateSize, plateSize, plateThick], center=true);
-        translate([mountingPattern/2, mountingPattern/2,0]) {
-            mountingHole();
-            
+        for(i = [1, -1], n = [1, -1]) translate([mountingPattern/2, mountingPattern/2,0])mountingHole();
         }
-        translate([mountingPattern/-2, mountingPattern/2,0]) {
-            mountingHole();
-            
-        }
-        translate([mountingPattern/2, mountingPattern/-2,0]) {
-            mountingHole();
-            
-        }
-        translate([mountingPattern/-2, mountingPattern/-2,0]) {
-            mountingHole();
-            
-        }
-     }   
 }
 
 
 
 module batteryCarriageSides() {
-    translate([0,(batteryWidth+extraBatteryWidth+carriageThick)/-2,(batteryHeight+plateThick+extraBatteryWall+carriageThick*2)/2]) {
-        cube([mountingPattern-holeSize-holeToCarriage*2, carriageThick, batteryHeight+extraBatteryWall], center=true);
-    }
-    translate([0,(batteryWidth+extraBatteryWidth+carriageThick)/2,(batteryHeight+plateThick+extraBatteryWall+carriageThick*2)/2]) {
-        cube([mountingPattern-holeSize-holeToCarriage*2, carriageThick, batteryHeight+extraBatteryWall], center=true);
-    }
+    for(i = [1, -1]) translate([0,(batteryWidth+extraBatteryWidth+carriageThick)/-2,(batteryHeight+plateThick+extraBatteryWall+carriageThick*2)/2]) cube([mountingPattern-holeSize-holeToCarriage*2, carriageThick, batteryHeight+extraBatteryWall], center=true);
 }
 module batteryCarriage() {
     translate([0,0,plateThick*liftMount]) {
