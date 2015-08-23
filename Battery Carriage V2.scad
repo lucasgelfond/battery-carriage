@@ -4,7 +4,7 @@
 batteryWidth = 42;
 
 //Height of used battery.
-batteryHeight = 22;
+batteryHeight = 20.5;
 
 holeSize = 4.42;
 //Size of mounting plate holes.
@@ -59,7 +59,7 @@ module mountingPlate() {
 
 
 module batteryCarriageSides() {
-    for(i = [1, -1]) translate([0,(batteryWidth+extraBatteryWidth+carriageThick)/-2,(batteryHeight+plateThick+extraBatteryWall+carriageThick*2)/2]) cube([mountingPattern-holeSize-holeToCarriage*2, carriageThick, batteryHeight+extraBatteryWall], center=true);
+    for(i = [1, -1]) translate([0,(batteryWidth+extraBatteryWidth+carriageThick)/2*i,(batteryHeight+plateThick+extraBatteryWall+carriageThick*2)/2]) cube([mountingPattern-holeSize-holeToCarriage*2, carriageThick, batteryHeight+extraBatteryWall], center=true);
 }
 module batteryCarriage() {
     translate([0,0,plateThick*liftMount]) {
