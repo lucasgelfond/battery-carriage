@@ -52,7 +52,7 @@ module mountingHole() {
 module mountingPlate() {
     difference() {
         cube([plateSize, plateSize, plateThick], center=true);
-        for(i = [1, -1], n = [1, -1]) translate([mountingPattern/2, mountingPattern/2,0])mountingHole();
+        for(X = [1, -1], Y = [1, -1]) translate([mountingPattern/2*X, mountingPattern/2*Y,0])mountingHole();
         }
 }
 
@@ -62,29 +62,17 @@ module batteryCarriageSides() {
     for(i = [1, -1]) translate([0,(batteryWidth+extraBatteryWidth+carriageThick)/2*i,(batteryHeight+plateThick+extraBatteryWall+carriageThick*2)/2]) cube([mountingPattern-holeSize-holeToCarriage*2, carriageThick, batteryHeight+extraBatteryWall], center=true);
 }
 module batteryCarriage() {
-    translate([0,0,plateThick*liftMount]) {
-        mountingPlate();
-    }
+    translate([0,0,plateThick*liftMount]) mountingPlate();
     batteryCarriageSides();
-     translate([0,0,(plateThick+carriageThick)/2]) {
-        cube([mountingPattern-holeSize-holeToCarriage*2,batteryWidth+extraBatteryWidth+carriageThick*2,carriageThick], center=true);
-    }
-    translate([0,0,plateThick/2+batteryHeight+extraBatteryWall+carriageThick*1.5]) {
-        cube([mountingPattern-holeSize-holeToCarriage*2,batteryWidth+extraBatteryWidth+carriageThick*2,carriageThick], center=true);
-    }
-    translate([0,0,batteryHeight+extraBatteryWall+carriageThick*2+plateThick-plateThick*liftMount]) {
-        mountingPlate();
-    }
+     translate([0,0,(plateThick+carriageThick)/2]) cube([mountingPattern-holeSize-holeToCarriage*2,batteryWidth+extraBatteryWidth+carriageThick*2,carriageThick], center=true);
+    translate([0,0,plateThick/2+batteryHeight+extraBatteryWall+carriageThick*1.5]) cube([mountingPattern-holeSize-holeToCarriage*2,batteryWidth+extraBatteryWidth+carriageThick*2,carriageThick], center=true);
+    translate([0,0,batteryHeight+extraBatteryWall+carriageThick*2+plateThick-plateThick*liftMount]) mountingPlate();
 }
 module carriageWithBatteryStrap() {
     difference() {
         batteryCarriage();
-        translate([0,(batteryWidth+extraBatteryWidth+carriageThick)/-2,(plateThick+batteryStrapHeight)/2+carriageThick+batteryStrapLift]) {
-            cube([batteryStrapWidth, carriageThick*5, batteryStrapHeight], center=true);
-        }
-        translate([0,(batteryWidth+extraBatteryWidth+carriageThick)/2,(plateThick+batteryStrapHeight)/2+carriageThick+batteryStrapLift]) {
-            cube([batteryStrapWidth, carriageThick*5, batteryStrapHeight], center=true);
-        }            
+        translate([0,(batteryWidth+extraBatteryWidth+carriageThick)/-2,(plateThick+batteryStrapHeight)/2+carriageThick+batteryStrapLift]) cube([batteryStrapWidth, carriageThick*5, batteryStrapHeight], center=true);
+        translate([0,(batteryWidth+extraBatteryWidth+carriageThick)/2,(plateThick+batteryStrapHeight)/2+carriageThick+batteryStrapLift]) cube([batteryStrapWidth, carriageThick*5, batteryStrapHeight], center=true);           
     }
 }
 
